@@ -1,0 +1,205 @@
+\documentclass{article}
+\usepackage{tikz}
+\usetikzlibrary{arrows,shapes.multipart,backgrounds,fit}
+\usepackage{pgf-umlcd}
+
+\usepackage[active,tightpage]{preview}
+\PreviewEnvironment{tikzpicture}
+\setlength\PreviewBorder{0pt}%
+
+\begin{document}
+\pagestyle{empty}
+\enlargethispage{100cm}
+% Start of code
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{tikzpicture}
+  \begin{class}[text width=8cm]{ClassName}{0,0}
+    \attribute{name : attribute type}
+    \attribute{name : attribute type = default value}
+
+    \operation{name(parameter list) : type of value returned}
+  \end{class}
+\end{tikzpicture}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{tikzpicture}
+  \begin{class}[text width=5cm]{BankAccount}{0,0}
+    \attribute{owner : String}
+    \attribute{balance : Dollars = 0}
+
+    \operation{deposit(amount : Dollars)}
+    \operation[0]{withdrawl(amount : Dollars)}
+  \end{class}
+
+  \begin{class}[text width=7cm]{CheckingAccount}{-5,-5}
+    \inherit{BankAccount}
+    \attribute{insufficientFundsFee : Dollars}
+
+    \operation{processCheck ( checkToProcess : Check )}
+    \operation{withdrawal ( amount : Dollars )}
+  \end{class}
+
+  \begin{class}[text width=7cm]{SavingsAccount}{5,-5}
+    \inherit{BankAccount}
+    \attribute{annualInteresRate : Percentage}
+
+    \operation{depositMonthlyInterest ( )}
+    \operation{withdrawal ( amount : Dollars )}
+  \end{class}
+
+\end{tikzpicture}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\begin{tikzpicture}
+  \begin{class}[text width=7cm]{Flight}{0,0}
+    \attribute{flightNumber : Integer}
+    \attribute{departureTime : Date}
+    \attribute{flightDuration : Minutes}
+    \attribute{departingAirport : String}
+    \attribute{arrivingAirport : String}
+
+    \operation{delayFlight ( numberOfMinutes : Minutes )}
+    \operation{getArrivalTime ( ) : Date}
+  \end{class}
+
+  \begin{class}{Plane}{11,0}
+    \attribute{airPlaneType : String}
+    \attribute{maximumSpeed : MPH}
+    \attribute{maximumDistance : Miles}
+    \attribute{tailID : String}
+  \end{class}
+
+  \association{Plane}{assignedPlane}{0..1}{Flight}{0..*}{assignedFlights}
+
+\end{tikzpicture}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\begin{tikzpicture}
+  % \draw[help lines] (-7,-6) grid (6,0);
+
+  \begin{class}[text width=6cm]{OverdrawnAccountsReport}{0,0}
+    \attribute{generatedOn : Date}
+
+    \operation{refresh ( )}
+  \end{class}
+
+  \begin{class}{BankAccount}{12,0}
+    \attribute{owner : String}
+    \attribute{balance : Dollars}
+
+    \operation{deposit(amount : Dollars)}
+    \operation[0]{withdrawl(amount : Dollars)}
+  \end{class}
+
+  \unidirectionalAssociation{OverdrawnAccountsReport}{overdrawnAccounts}{0..*}{BankAccount}
+
+\end{tikzpicture}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\begin{tikzpicture}
+  \begin{package}{Accounts}
+    \begin{class}[text width=5cm]{BankAccount}{0,0}
+      \attribute{owner : String}
+      \attribute{balance : Dollars = 0}
+
+      \operation{deposit(amount : Dollars)}
+      \operation[0]{withdrawl(amount : Dollars)}
+    \end{class}
+
+    \begin{class}[text width=7cm]{CheckingAccount}{-5,-5}
+      \inherit{BankAccount}
+      \attribute{insufficientFundsFee : Dollars}
+
+      \operation{processCheck ( checkToProcess : Check )}
+      \operation{withdrawal ( amount : Dollars )}
+    \end{class}
+
+    \begin{class}[text width=7cm]{SavingsAccount}{5,-5}
+      \inherit{BankAccount}
+      \attribute{annualInteresRate : Percentage}
+
+      \operation{depositMonthlyInterest ( )}
+      \operation{withdrawal ( amount : Dollars )}
+    \end{class}
+  \end{package}
+
+\end{tikzpicture}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\begin{tikzpicture}[show background grid]
+  \begin{interface}{Person}{0,0}
+    \attribute{firstName : String}
+    \attribute{lastName : String}
+  \end{interface}
+
+  \begin{class}{Professor}{-5,-5}
+    \implement{Person}
+    \attribute{salary : Dollars}
+  \end{class}
+
+  \begin{class}{Student}{5,-5}
+    \implement{Person}
+    \attribute{major : String}
+  \end{class}
+\end{tikzpicture}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\begin{tikzpicture}[show background grid]
+  \begin{class}{Car}{0,0}
+  \end{class}
+
+  \begin{class}{Wheel}{7.5,0}
+  \end{class}
+
+  \aggregation{Car}{wheels}{4}{Wheel}
+
+\end{tikzpicture}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\begin{tikzpicture}[show background grid]
+  \begin{class}{Company}{0,0}
+  \end{class}
+
+  \begin{class}{Department}{10,0}
+  \end{class}
+
+  \composition{Company}{theDepartment}{1..*}{Department}
+
+\end{tikzpicture}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\begin{tikzpicture}[show background grid]
+    \begin{class}[text width=7cm]{Class}{0,0}
+    \attribute{+ Public}
+    \attribute{\# Protected}
+    \attribute{- Private}
+    \attribute{$\sim$ Package}
+  \end{class}
+
+  \begin{class}[text width=7cm]{BankAccount}{0,-3}
+    \attribute{+ owner : String}
+    \attribute{+ balance : Dollars}
+    
+    \operation{+ deposit( amount : Dollars )}
+    \operation{+ withdrawal( amount : Dollars )}
+    \operation{\# updateBalance( newBalance : Dollars )}
+  \end{class}
+\end{tikzpicture}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+% End of code
+
+% 
+\end{document}
+%%% Local Variables: 
+%%% mode: Tex-PDF
+%%% TeX-master: t
+%%% End: 
