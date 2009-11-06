@@ -29,7 +29,8 @@ part/.style={align=center}, text width=5cm]
 
 % declare layers
 \pgfdeclarelayer{background}
-\pgfsetlayers{background,main}
+\pgfdeclarelayer{connectionlayers}
+\pgfsetlayers{background,connectionlayers,main}
 
 \newcounter{umlcdClassAttributesNum}
 \newcounter{umlcdClassOperationsNum}
@@ -42,7 +43,7 @@ part/.style={align=center}, text width=5cm]
 {
 \begin{classAndInterfaceCommon}{#1}{#2}{#3}
 }%
-{\node[this umlcd style] (\umlcdClassName) at (\umlcdClassPos)
+{\node[this umlcd style, anchor=north] (\umlcdClassName) at (\umlcdClassPos)
     {\textbf{\umlcdClassName}
 \nodepart{two}
 \umlcdClassAttributes
@@ -57,7 +58,7 @@ part/.style={align=center}, text width=5cm]
 {
 \begin{classAndInterfaceCommon}{#1}{#2}{#3}
 }%
-{\node[this umlcd style] (\umlcdClassName) at (\umlcdClassPos)
+{\node[this umlcd style, anchor=north] (\umlcdClassName) at (\umlcdClassPos)
     {$<<$interface$>>$ \\ \textbf{\umlcdClassName}
 \nodepart{two}
 \umlcdClassAttributes
@@ -84,6 +85,7 @@ part/.style={align=center}, text width=5cm]
 }%
 {
 %% connections
+\begin{pgfonlayer}{connectionlayers}
 \pgfmathapproxequalto{\value{umlcdClassAbstractClassNum}}{0}
 \ifpgfmathcomparison
 \else
@@ -99,6 +101,7 @@ part/.style={align=center}, text width=5cm]
   \draw [umlcd style implement line] (\c) -- (\umlcdClassName);
 }
 \fi
+\end{pgfonlayer}
 
 %% add to fit
 \let\umlcdPackageFitOld\umlcdPackageFit
@@ -112,7 +115,7 @@ part/.style={align=center}, text width=5cm]
 \protected@xdef\umlcdClassAttributes{#1}
 \else
 \let\umlcdClassAttributesOld\umlcdClassAttributes
-\protected@xdef\umlcdClassAttributes{\umlcdClassAttributesOld \ \\
+\protected@xdef\umlcdClassAttributes{\umlcdClassAttributesOld \ \newline
     #1}
 \fi
 }
@@ -131,7 +134,7 @@ part/.style={align=center}, text width=5cm]
 \protected@xdef\umlcdClassOperations{\virtualoperation}
 \else
 \let\umlcdClassOperationsOld\umlcdClassOperations
-\protected@xdef\umlcdClassOperations{\umlcdClassOperationsOld \ \\
+\protected@xdef\umlcdClassOperations{\umlcdClassOperationsOld \ \newline
     \virtualoperation}
 \fi
 }
@@ -195,7 +198,7 @@ node[near end, below]{#3};
 \def\umlcdPackageName{#1}
 }{
   \begin{pgfonlayer}{background}
-  \node[umlcd style, draw, fit = \umlcdPackageFit] (\umlcdPackageName) {};
+  \node[umlcd style, draw, inner sep=0.5cm, fit = \umlcdPackageFit] (\umlcdPackageName) {};
   \node[umlcd style, draw, outer ysep=-0.5, anchor=south west] (\umlcdPackageName caption) at
   (\umlcdPackageName.north west) {\umlcdPackageName};
   \end{pgfonlayer}
