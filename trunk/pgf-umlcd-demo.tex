@@ -32,6 +32,15 @@ keywordstyle=\color{blue}\bfseries
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\example}[1]{
+\lstinputlisting{demo/#1}
+\resizebox{\linewidth}{!}{
+\input{demo/#1}
+}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \begin{document}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \title{Drawing UML Class Diagram by using \texttt{pgf-umlcd}}
@@ -42,35 +51,43 @@ keywordstyle=\color{blue}\bfseries
 \tableofcontents
 
 \section{Simple examples}
-\subsection{Class and Package}
-
-\subsubsection{Package}
-\demo{package}
-
-\subsection{Class}
+\subsection{Class with attributes and operations}
 \demo{class}
 
-\subsection{Interface}
+\subsubsection{Visibility of attributes and operations}
+\demo{visibility}
+
+\subsubsection{Abstract class and interface}
+\demo{abstract-class}
 \demo{interface}
 
-\subsection{Inheritance}
+\subsection{Inheritance and implement}
+\subsubsection{Inheritance}
 \demo{inheritance}
  
-\subsection{Association} 
+\subsubsection{Implement an interface}
+\demo{implement-interface}
+
+\subsection{Association, Aggregation and Composition}
+\subsubsection{Association} 
 \demo{association}
  
-\subsection{Unidirectional association}
+\subsubsection{Unidirectional association}
 \demo{unidirectional-association}
 
-\subsection{Aggregation}
+\subsubsection{Aggregation}
 \demo{aggregation}
 
-\subsection{Composition}
+\subsubsection{Composition}
 \demo{composition}
 
-\section{Visibility}
-\demo{visibility}
- 
+\subsection{Package}
+\demo{package}
+
+\section{Full examples: Design Patterns}
+\subsection{Abstract Factory}
+\example{abstract-factory}
+
 \end{document}
 %%% Local Variables: 
 %%% mode: Tex-PDF
