@@ -6,6 +6,7 @@
 % Author: Xu Yuan <xu@informatik.hu-berlin.de>, Humboldt University, Berlin
 % Style from: http://www.ibm.com/developerworks/cn/rational/r-uml/
 
+\usetikzlibrary{arrows,shapes.multipart,backgrounds,fit}
 \tikzstyle{help lines}+=[blue!50,very thin,dashed]
 
 \newcommand{\umltextcolor}{black}
@@ -71,6 +72,23 @@ minimum height=1cm, node distance=2cm]
 
 \end{classAndInterfaceCommon}
 }
+
+\newenvironment{abstractclass}[3][]%
+{
+\begin{classAndInterfaceCommon}{#1}{#2}{#3}
+}%
+{\node[this umlcd style, anchor=north] (\umlcdClassName) at (\umlcdClassPos)
+    {$<<$abstract$>>$ \\ \textbf{\umlcdClassName}
+\nodepart{second}
+\umlcdClassAttributes
+\nodepart{third}
+\umlcdClassOperations
+};
+
+\end{classAndInterfaceCommon}
+}
+
+
 
 \newenvironment*{classAndInterfaceCommon}[3]
 {
