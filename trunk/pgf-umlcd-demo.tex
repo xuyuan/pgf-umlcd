@@ -1,5 +1,6 @@
 \documentclass{article}
 \usepackage[margin=12mm]{geometry}
+\usepackage{hyperref}
 
 \usepackage{tikz}
 \usepackage{pgf-umlcd}
@@ -12,34 +13,49 @@
 language=[LaTeX]TeX,
 breaklines=true,
 frame=single,
-frameround=tttt,
+% frameround=tttt,
 basicstyle=\footnotesize\ttfamily,
 backgroundcolor=\color{listinggray},
-keywordstyle=\color{blue}\bfseries
+keywordstyle=\color{blue}
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newcommand{\demo}[1]{
-\begin{minipage}{.5\linewidth}
-\lstinputlisting{demo/#1}
-\end{minipage}~~~~~~~~~~~~~~
-\begin{minipage}{.45\linewidth}
-\resizebox{\linewidth}{!}{
-\input{demo/#1}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  anchorcolor=black,
+  citecolor=olive,
+  filecolor=magenta,
+  menucolor=red,
+  urlcolor=magenta
 }
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\demo}[2][1]{
+\begin{minipage}{.49\linewidth}
+\centering
+\resizebox{#1\linewidth}{!}{
+\input{demo/#2}
+}
+\end{minipage}
+\hspace{0.01\linewidth}
+\begin{minipage}{.5\linewidth}
+\lstinputlisting{demo/#2}
 \end{minipage}
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\example}[1]{
-\lstinputlisting{demo/#1}
 \resizebox{\linewidth}{!}{
 \input{demo/#1}
 }
+\lstinputlisting{demo/#1}
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 \begin{document}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -48,6 +64,14 @@ keywordstyle=\color{blue}\bfseries
 \maketitle
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\begin{abstract}
+  \texttt{pgf-umlcd} is a LaTeX package for drawing UML Class
+  Diagrams. As stated by its name, it is based on a very popular
+  graphic package \texttt{PGF/TikZ}. This document presents the usage
+  of \texttt{pgf-umlcd (v 0.1)} and collects some UML class diagrams as
+  examples.
+\end{abstract}
+
 \tableofcontents
 
 \section{Simple examples}
@@ -55,11 +79,11 @@ keywordstyle=\color{blue}\bfseries
 \demo{class}
 
 \subsubsection{Visibility of attributes and operations}
-\demo{visibility}
+\demo[0.8]{visibility}
 
 \subsubsection{Abstract class and interface}
-\demo{abstract-class}
-\demo{interface}
+\demo[0.5]{abstract-class}
+\demo[0.5]{interface}
 
 \subsection{Inheritance and implement}
 \subsubsection{Inheritance}
