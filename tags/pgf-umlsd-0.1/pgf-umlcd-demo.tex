@@ -1,0 +1,119 @@
+\documentclass{article}
+\usepackage[margin=12mm]{geometry}
+\usepackage{hyperref}
+
+\usepackage{tikz}
+\usepackage{pgf-umlcd}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{listings}
+\usepackage{color}
+\definecolor{listinggray}{gray}{0.92}
+\lstset{ %
+language=[LaTeX]TeX,
+breaklines=true,
+frame=single,
+% frameround=tttt,
+basicstyle=\footnotesize\ttfamily,
+backgroundcolor=\color{listinggray},
+keywordstyle=\color{blue}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  anchorcolor=black,
+  citecolor=olive,
+  filecolor=magenta,
+  menucolor=red,
+  urlcolor=magenta
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\demo}[2][1]{
+\begin{minipage}{.49\linewidth}
+\centering
+\resizebox{#1\linewidth}{!}{
+\input{demo/#2}
+}
+\end{minipage}
+\hspace{0.01\linewidth}
+\begin{minipage}{.5\linewidth}
+\lstinputlisting{demo/#2}
+\end{minipage}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\example}[1]{
+\resizebox{\linewidth}{!}{
+\input{demo/#1}
+}
+\lstinputlisting{demo/#1}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Drawing UML Class Diagram by using \texttt{pgf-umlcd}}
+\author{Yuan Xu}
+\maketitle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{abstract}
+  \texttt{pgf-umlcd} is a LaTeX package for drawing UML Class
+  Diagrams. As stated by its name, it is based on a very popular
+  graphic package \texttt{PGF/TikZ}. This document presents the usage
+  of \texttt{pgf-umlcd (v 0.1)} and collects some UML class diagrams as
+  examples.
+\end{abstract}
+
+\tableofcontents
+
+\section{Simple examples}
+\subsection{Class with attributes and operations}
+\demo{class}
+
+\subsubsection{Visibility of attributes and operations}
+\demo[0.8]{visibility}
+
+\subsubsection{Abstract class and interface}
+\demo[0.5]{abstract-class}
+\demo[0.5]{interface}
+
+\subsection{Inheritance and implement}
+\subsubsection{Inheritance}
+\demo{inheritance}
+ 
+\subsubsection{Implement an interface}
+\demo{implement-interface}
+
+\subsection{Association, Aggregation and Composition}
+\subsubsection{Association} 
+\demo{association}
+ 
+\subsubsection{Unidirectional association}
+\demo{unidirectional-association}
+
+\subsubsection{Aggregation}
+\demo{aggregation}
+
+\subsubsection{Composition}
+\demo{composition}
+
+\subsection{Package}
+\demo{package}
+
+\section{Full examples: Design Patterns}
+\subsection{Abstract Factory}
+\example{abstract-factory}
+
+\end{document}
+%%% Local Variables: 
+%%% mode: Tex-PDF
+%%% TeX-master: t
+%%% End: 

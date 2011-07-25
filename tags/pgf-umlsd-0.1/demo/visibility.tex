@@ -1,0 +1,17 @@
+\begin{tikzpicture}%[show background grid]
+    \begin{class}[text width=7cm]{Class}{0,0}
+    \attribute{+ Public}
+    \attribute{\# Protected}
+    \attribute{- Private}
+    \attribute{$\sim$ Package}
+  \end{class}
+
+  \begin{class}[text width=7cm]{BankAccount}{0,-3}
+    \attribute{+ owner : String}
+    \attribute{+ balance : Dollars}
+    
+    \operation{+ deposit( amount : Dollars )}
+    \operation{+ withdrawal( amount : Dollars )}
+    \operation{\# updateBalance( newBalance : Dollars )}
+  \end{class}
+\end{tikzpicture}

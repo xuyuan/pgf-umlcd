@@ -1,0 +1,22 @@
+\begin{tikzpicture}
+  \begin{class}[text width=7cm]{Flight}{0,0}
+    \attribute{flightNumber : Integer}
+    \attribute{departureTime : Date}
+    \attribute{flightDuration : Minutes}
+    \attribute{departingAirport : String}
+    \attribute{arrivingAirport : String}
+
+    \operation{delayFlight ( numberOfMinutes : Minutes )}
+    \operation{getArrivalTime ( ) : Date}
+  \end{class}
+
+  \begin{class}{Plane}{11,0}
+    \attribute{airPlaneType : String}
+    \attribute{maximumSpeed : MPH}
+    \attribute{maximumDistance : Miles}
+    \attribute{tailID : String}
+  \end{class}
+
+  \association{Plane}{assignedPlane}{0..1}{Flight}{0..*}{assignedFlights}
+
+\end{tikzpicture}
