@@ -22,10 +22,11 @@
 \tikzstyle{umlcd style inherit line}=[color=\umldrawcolor, open triangle 45-]
 \tikzstyle{splitline}=[color=\umldrawcolor, dotted,font=\itshape]
 
-\tikzstyle{umlcd style class}=[rectangle split, rectangle split
-parts=3, draw, minimum height=2em, umlcolor, minimum width=2cm,
-minimum height=1cm, node distance=2cm, every text node
-part/.style={align=center}, text width=5cm]
+\tikzstyle{umlcd style class}=[rectangle split, rectangle split parts=3, 
+every text node part/.style={text centered},
+draw, minimum height=2em, umlcolor, minimum width=2cm, text width=5cm,
+minimum height=1cm, node distance=2cm]
+
 
 \tikzstyle{umlcd style dashed line}=[color=\umldrawcolor, >=angle 90,dashed]
 
@@ -47,9 +48,9 @@ part/.style={align=center}, text width=5cm]
 }%
 {\node[this umlcd style, anchor=north] (\umlcdClassName) at (\umlcdClassPos)
     {\textbf{\umlcdClassName}
-\nodepart{two}
+\nodepart{second}
 \umlcdClassAttributes
-\nodepart{three}
+\nodepart{third}
 \umlcdClassOperations
 };
 
@@ -62,9 +63,9 @@ part/.style={align=center}, text width=5cm]
 }%
 {\node[this umlcd style, anchor=north] (\umlcdClassName) at (\umlcdClassPos)
     {$<<$interface$>>$ \\ \textbf{\umlcdClassName}
-\nodepart{two}
+\nodepart{second}
 \umlcdClassAttributes
-\nodepart{three}
+\nodepart{third}
 \umlcdClassOperations
 };
 
@@ -88,17 +89,13 @@ part/.style={align=center}, text width=5cm]
 {
 %% connections
 \begin{pgfonlayer}{connectionlayers}
-\pgfmathapproxequalto{\value{umlcdClassAbstractClassNum}}{0}
-\ifpgfmathcomparison
-\else
+\ifnum\c@umlcdClassAbstractClassNum>0
 \foreach \c in {\umlcdClassAbstractClass}{
   \draw [umlcd style inherit line] (\c) -- (\umlcdClassName);
 }
 \fi
 
-\pgfmathapproxequalto{\value{umlcdClassInterfaceNum}}{0}
-\ifpgfmathcomparison
-\else
+\ifnum\c@umlcdClassInterfaceNum>0
 \foreach \c in {\umlcdClassInterface}{
   \draw [umlcd style implement line] (\c) -- (\umlcdClassName);
 }
@@ -111,28 +108,25 @@ part/.style={align=center}, text width=5cm]
 }
 
 \newcommand{\attribute}[1]{%
-\pgfmathapproxequalto{\value{umlcdClassAttributesNum}}{0}
-\stepcounter{umlcdClassAttributesNum}
-\ifpgfmathcomparison
+\ifnum\c@umlcdClassAttributesNum=0
 \protected@xdef\umlcdClassAttributes{#1}
 \else
 \let\umlcdClassAttributesOld\umlcdClassAttributes
 \protected@xdef\umlcdClassAttributes{\umlcdClassAttributesOld \ \newline
     #1}
 \fi
+\stepcounter{umlcdClassAttributesNum}
 }
 
 \newcommand{\operation}[2][1]{%
 \stepcounter{umlcdClassOperationsNum}
 
 \def\virtualoperation{#2}
-\pgfmathapproxequalto{#1}{0}
-\ifpgfmathcomparison
+\ifnum0=#1
 \def\virtualoperation{\textit{#2}}
 \fi
 
-\pgfmathapproxequalto{\value{umlcdClassOperationsNum}}{1}
-\ifpgfmathcomparison
+\ifnum\c@umlcdClassOperationsNum=1
 \protected@xdef\umlcdClassOperations{\virtualoperation}
 \else
 \let\umlcdClassOperationsOld\umlcdClassOperations
@@ -144,8 +138,7 @@ part/.style={align=center}, text width=5cm]
 \newcommand{\inherit}[1]
 {
 \stepcounter{umlcdClassAbstractClassNum}
-\pgfmathapproxequalto{\value{umlcdClassAbstractClassNum}}{1}
-\ifpgfmathcomparison
+\ifnum\c@umlcdClassAbstractClassNum=1
 \protected@xdef\umlcdClassAbstractClass{#1}
 \else
 \let\umlcdClassAbstractClassOld\umlcdClassAbstractClass
@@ -157,8 +150,7 @@ part/.style={align=center}, text width=5cm]
 \newcommand{\implement}[1]
 {
 \stepcounter{umlcdClassInterfaceNum}
-\pgfmathapproxequalto{\value{umlcdClassInterfaceNum}}{1}
-\ifpgfmathcomparison
+\ifnum\c@umlcdClassInterfaceNum=1
 \protected@xdef\umlcdClassInterface{#1}
 \else
 \let\umlcdClassInterfaceOld\umlcdClassInterface
