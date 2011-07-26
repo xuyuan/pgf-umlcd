@@ -5,6 +5,7 @@
 % Home page of project: http://pgf-umlcd.googlecode.com/
 % Author: Xu Yuan <xu@informatik.hu-berlin.de>, Humboldt University, Berlin
 % Style from: http://www.ibm.com/developerworks/cn/rational/r-uml/
+%
 
 \usetikzlibrary{arrows,shapes.multipart,backgrounds,fit}
 \tikzstyle{help lines}+=[blue!50,very thin,dashed]
@@ -36,6 +37,7 @@ minimum height=1cm, node distance=2cm]
 \newif\ifsimplified\simplifiedfalse
 \DeclareOption{simplified}{\simplifiedtrue}
 \ProcessOptions\relax
+
 
 % declare layers
 \pgfdeclarelayer{background}

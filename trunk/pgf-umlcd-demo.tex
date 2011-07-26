@@ -58,12 +58,11 @@ keywordstyle=\color{blue}
 }
 \lstinputlisting{demo/#1}
 }
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
 \begin{document}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\title{Drawing UML Class Diagram by using \texttt{pgf-umlcd}}
+\title{Drawing UML Class Diagram by using \texttt{pgf-umlcd (v0.2)}}
 \author{Yuan Xu}
 \maketitle
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -72,7 +71,7 @@ keywordstyle=\color{blue}
   \texttt{pgf-umlcd} is a LaTeX package for drawing UML Class
   Diagrams. As stated by its name, it is based on a very popular
   graphic package \texttt{PGF/TikZ}. This document presents the usage
-  of \texttt{pgf-umlcd (v 0.1)} and collects some UML class diagrams as
+  of \texttt{pgf-umlcd} and collects some UML class diagrams as
   examples.
 \end{abstract}
 
@@ -80,6 +79,8 @@ keywordstyle=\color{blue}
 
 \section{Simple examples}
 \subsection{Class with attributes and operations}
+Note: If you don't want to show empty parts in the diagrams, please
+use \texttt{simplified} option, e.g. \lstinline|\usepackage[simplified]{pgf-umlcd}|.\\
 \demo{class}
 
 \subsubsection{Visibility of attributes and operations}
@@ -120,6 +121,12 @@ Note: Object with rounded corners and methods are used in German school for dida
 \section{Full examples: Design Patterns}
 \subsection{Abstract Factory}
 \example{abstract-factory}
+
+\section{Acknowledgements}
+Many people contributed to \texttt{pgf-umlcd} by reporting problems,
+suggesting various improvements or submitting code. Here is a list of
+these people: \href{mailto:martin.quinson@loria.fr}{Martin Quinson},
+and \href{mailto:johannes_pieper@yahoo.de}{Johannes Pieper}.
 
 \end{document}
 %%% Local Variables: 
