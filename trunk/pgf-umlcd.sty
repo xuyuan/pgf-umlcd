@@ -33,6 +33,8 @@ minimum height=1cm, node distance=2cm]
 
 \tikzstyle{umlcd style school}=[]
 \DeclareOption{school}{\tikzstyle{umlcd style school}=[rounded corners]}
+\newif\ifsimplified\simplifiedfalse
+\DeclareOption{simplified}{\simplifiedtrue}
 \ProcessOptions\relax
 
 % declare layers
@@ -44,6 +46,7 @@ minimum height=1cm, node distance=2cm]
 \newcounter{umlcdClassOperationsNum}
 \newcounter{umlcdClassAbstractClassNum}
 \newcounter{umlcdClassInterfaceNum}
+\newcounter{umlcdClassSplitPartNum}
 
 \def\umlcdPackageFit{}
 
@@ -51,12 +54,36 @@ minimum height=1cm, node distance=2cm]
 {
 \begin{classAndInterfaceCommon}{#1}{#2}{#3}
 }%
-{\node[this umlcd style, anchor=north] (\umlcdClassName) at (\umlcdClassPos)
+{\calcuateNumberOfParts{}
+\node[this umlcd style, anchor=north] (\umlcdClassName) at (\umlcdClassPos)
     {\textbf{\umlcdClassName}
-\nodepart{second}
-\umlcdClassAttributes
-\nodepart{third}
-\umlcdClassOperations
+\insertAttributesAndOperations{}
+};
+
+\end{classAndInterfaceCommon}
+}
+
+\newenvironment{interface}[3][]%
+{
+\begin{classAndInterfaceCommon}{#1}{#2}{#3}
+}%
+{\calcuateNumberOfParts{}
+\node[this umlcd style, anchor=north] (\umlcdClassName) at (\umlcdClassPos)
+    {$<<$interface$>>$ \\ \textbf{\umlcdClassName}
+\insertAttributesAndOperations{}
+};
+
+\end{classAndInterfaceCommon}
+}
+
+\newenvironment{abstractclass}[3][]%
+{
+\begin{classAndInterfaceCommon}{#1}{#2}{#3}
+}%
+{\calcuateNumberOfParts{}
+\node[this umlcd style, anchor=north] (\umlcdClassName) at (\umlcdClassPos)
+    {$<<$abstract$>>$ \\ \textbf{\umlcdClassName}
+\insertAttributesAndOperations{}
 };
 
 \end{classAndInterfaceCommon}
@@ -67,55 +94,62 @@ minimum height=1cm, node distance=2cm]
 \begin{classAndInterfaceCommon}{#1}{#2}{#3}
 }%
 {
-\ifnum\c@umlcdClassOperationsNum>0
-\protected@xdef\umlcdSplitPart{3}
-\else
-\protected@xdef\umlcdSplitPart{2}
-\fi
+  % customized
+  \ifsimplified
+  \calcuateNumberOfParts{}
+  \else
+  \ifnum\c@umlcdClassOperationsNum>0
+  \setcounter{umlcdClassSplitPartNum}{3}
+  \protected@xdef\umlcdSplitPart{3}
+  \else
+  \setcounter{umlcdClassSplitPartNum}{2}
+  \protected@xdef\umlcdSplitPart{2}
+  \fi
+  \fi
 
-\node[this umlcd style, anchor=north, rectangle split
-parts=\umlcdSplitPart, umlcd style school] (\umlcdClassName) at (\umlcdClassPos)
+\node[this umlcd style, anchor=north, umlcd style school] (\umlcdClassName) at (\umlcdClassPos)
     {\underline{\textbf{\umlcdClassName}}
-\nodepart{second}
-\umlcdClassAttributes
-\nodepart{third}
-\umlcdClassOperations
+\insertAttributesAndOperations{}
 };
 
 \end{classAndInterfaceCommon}
 }
 
-\newenvironment{interface}[3][]%
+\newcommand*{\insertAttributesAndOperations}
 {
-\begin{classAndInterfaceCommon}{#1}{#2}{#3}
-}%
-{\node[this umlcd style, anchor=north] (\umlcdClassName) at (\umlcdClassPos)
-    {$<<$interface$>>$ \\ \textbf{\umlcdClassName}
-\nodepart{second}
-\umlcdClassAttributes
-\nodepart{third}
-\umlcdClassOperations
-};
-
-\end{classAndInterfaceCommon}
+  \ifnum\c@umlcdClassSplitPartNum>1
+  \nodepart{second}
+  \fi
+  \umlcdClassAttributes
+  \ifnum\c@umlcdClassSplitPartNum>2
+  \nodepart{third}
+  \fi
+  \umlcdClassOperations
 }
 
-\newenvironment{abstractclass}[3][]%
+\newcommand*{\calcuateNumberOfParts}
 {
-\begin{classAndInterfaceCommon}{#1}{#2}{#3}
-}%
-{\node[this umlcd style, anchor=north] (\umlcdClassName) at (\umlcdClassPos)
-    {$<<$abstract$>>$ \\ \textbf{\umlcdClassName}
-\nodepart{second}
-\umlcdClassAttributes
-\nodepart{third}
-\umlcdClassOperations
-};
+  % calcuate the number of parts
+  \ifsimplified
+  \setcounter{umlcdClassSplitPartNum}{1}
+  \ifnum\c@umlcdClassAttributesNum>0
+  \stepcounter{umlcdClassSplitPartNum}
+  \fi
+  \ifnum\c@umlcdClassOperationsNum>0
+  \stepcounter{umlcdClassSplitPartNum}
+  \fi
+  \else
+  \setcounter{umlcdClassSplitPartNum}{3}% three parts by default
+  \fi
 
-\end{classAndInterfaceCommon}
+  \protected@xdef\umlcdSplitPart{3}
+  \ifnum\c@umlcdClassSplitPartNum=1
+  \protected@xdef\umlcdSplitPart{1}
+  \fi
+  \ifnum\c@umlcdClassSplitPartNum=2
+  \protected@xdef\umlcdSplitPart{2}
+  \fi
 }
-
-
 
 \newenvironment*{classAndInterfaceCommon}[3]
 {
@@ -129,7 +163,8 @@ parts=\umlcdSplitPart, umlcd style school] (\umlcdClassName) at (\umlcdClassPos)
 \setcounter{umlcdClassOperationsNum}{0}%
 \setcounter{umlcdClassAbstractClassNum}{0}%
 \setcounter{umlcdClassInterfaceNum}{0}%
-\tikzstyle{this umlcd style}=[umlcd style class, #1]
+\tikzstyle{this umlcd style}=[umlcd style class, rectangle split
+  parts=\umlcdSplitPart, #1]
 }%
 {
 %% connections
