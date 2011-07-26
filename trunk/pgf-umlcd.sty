@@ -31,6 +31,10 @@ minimum height=1cm, node distance=2cm]
 
 \tikzstyle{umlcd style dashed line}=[color=\umldrawcolor, >=angle 90,dashed]
 
+\tikzstyle{umlcd style school}=[]
+\DeclareOption{school}{\tikzstyle{umlcd style school}=[rounded corners]}
+\ProcessOptions\relax
+
 % declare layers
 \pgfdeclarelayer{background}
 \pgfdeclarelayer{connectionlayers}
@@ -48,6 +52,35 @@ minimum height=1cm, node distance=2cm]
 \begin{classAndInterfaceCommon}{#1}{#2}{#3}
 }%
 {\node[this umlcd style, anchor=north] (\umlcdClassName) at (\umlcdClassPos)
+    {\textbf{\umlcdClassName}
+\nodepart{second}
+\umlcdClassAttributes
+\nodepart{third}
+\umlcdClassOperations
+};
+
+\end{classAndInterfaceCommon}
+}
+
+\newenvironment{object}[3][]%
+{
+\begin{classAndInterfaceCommon}{#1}{#2}{#3}
+}%
+{\node[this umlcd style, anchor=north, rectangle split
+parts=2, umlcd style school] (\umlcdClassName) at (\umlcdClassPos)
+    {\textbf{\umlcdClassName}
+\nodepart{second}
+\umlcdClassAttributes
+};
+
+\end{classAndInterfaceCommon}
+}
+
+\newenvironment{objectIncMeth}[3][]%
+{
+\begin{classAndInterfaceCommon}{#1}{#2}{#3}
+}%
+{\node[this umlcd style, anchor=north, umlcd style school] (\umlcdClassName) at (\umlcdClassPos)
     {\textbf{\umlcdClassName}
 \nodepart{second}
 \umlcdClassAttributes
