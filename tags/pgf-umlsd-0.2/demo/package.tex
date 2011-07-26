@@ -1,0 +1,28 @@
+\begin{tikzpicture}
+  \begin{package}{Accounts}
+    \begin{class}[text width=5cm]{BankAccount}{0,0}
+      \attribute{owner : String}
+      \attribute{balance : Dollars = 0}
+
+      \operation{deposit(amount : Dollars)}
+      \operation[0]{withdrawl(amount : Dollars)}
+    \end{class}
+
+    \begin{class}[text width=7cm]{CheckingAccount}{-5,-5}
+      \inherit{BankAccount}
+      \attribute{insufficientFundsFee : Dollars}
+
+      \operation{processCheck ( checkToProcess : Check )}
+      \operation{withdrawal ( amount : Dollars )}
+    \end{class}
+
+    \begin{class}[text width=7cm]{SavingsAccount}{5,-5}
+      \inherit{BankAccount}
+      \attribute{annualInteresRate : Percentage}
+
+      \operation{depositMonthlyInterest ( )}
+      \operation{withdrawal ( amount : Dollars )}
+    \end{class}
+  \end{package}
+
+\end{tikzpicture}
