@@ -66,21 +66,15 @@ minimum height=1cm, node distance=2cm]
 {
 \begin{classAndInterfaceCommon}{#1}{#2}{#3}
 }%
-{\node[this umlcd style, anchor=north, rectangle split
-parts=2, umlcd style school] (\umlcdClassName) at (\umlcdClassPos)
-    {\textbf{\umlcdClassName}
-\nodepart{second}
-\umlcdClassAttributes
-};
-
-\end{classAndInterfaceCommon}
-}
-
-\newenvironment{objectIncMeth}[3][]%
 {
-\begin{classAndInterfaceCommon}{#1}{#2}{#3}
-}%
-{\node[this umlcd style, anchor=north, umlcd style school] (\umlcdClassName) at (\umlcdClassPos)
+\ifnum\c@umlcdClassOperationsNum>0
+\protected@xdef\umlcdSplitPart{3}
+\else
+\protected@xdef\umlcdSplitPart{2}
+\fi
+
+\node[this umlcd style, anchor=north, rectangle split
+parts=\umlcdSplitPart, umlcd style school] (\umlcdClassName) at (\umlcdClassPos)
     {\textbf{\umlcdClassName}
 \nodepart{second}
 \umlcdClassAttributes
