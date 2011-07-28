@@ -33,7 +33,8 @@ minimum height=1cm, node distance=2cm]
 \tikzstyle{umlcd style dashed line}=[color=\umldrawcolor, >=angle 90,dashed]
 
 \tikzstyle{umlcd style school}=[]
-\DeclareOption{school}{\tikzstyle{umlcd style school}=[rounded corners]}
+\newif\ifschool\schoolfalse
+\DeclareOption{school}{\tikzstyle{umlcd style school}=[rounded corners] \schooltrue}
 \newif\ifsimplified\simplifiedfalse
 \DeclareOption{simplified}{\simplifiedtrue}
 \ProcessOptions\relax
@@ -110,8 +111,12 @@ minimum height=1cm, node distance=2cm]
   \fi
 
 \node[this umlcd style, anchor=north, umlcd style school] (\umlcdClassName) at (\umlcdClassPos)
-    {\underline{\textbf{\umlcdClassName}}
-\insertAttributesAndOperations{}
+    { \ifschool
+				\textbf{\umlcdClassName}
+			\else 
+				\underline{\textbf{\umlcdClassName}}
+			\fi
+			\insertAttributesAndOperations{}
 };
 
 \end{classAndInterfaceCommon}
@@ -278,6 +283,16 @@ node[near end, below]{#3};
   \node[umlcd style, draw, outer ysep=-0.5, anchor=south west] (\umlcdPackageName caption) at
   (\umlcdPackageName.north west) {\umlcdPackageName};
   \end{pgfonlayer}
+}
+
+\newcommand{\switchUmlcdSchool}{
+	\ifschool
+		\tikzstyle{umlcd style school}=[]
+		\schoolfalse
+	\else
+		\tikzstyle{umlcd style school}=[rounded corners]
+		\schooltrue
+	\fi
 }
 
 %%% End of pgf-umlcd.sty

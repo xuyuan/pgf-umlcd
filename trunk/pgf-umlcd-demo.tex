@@ -5,7 +5,7 @@
 \usepackage{tikz}
 
 \usepackage[
-school,
+% school,
 % simplified
 ]{pgf-umlcd}
 
@@ -91,7 +91,9 @@ use \texttt{simplified} option, e.g. \lstinline|\usepackage[simplified]{pgf-umlc
 \demo[0.5]{interface}
 
 \subsubsection{Object}
-Note: Object with rounded corners and methods are used in German school for didactic reasons. You get the rounded corners only with \lstinline|\usepackage[school]{pgf-umlcd}|.\\
+\demo[0.7]{object}
+Note: Object with rounded corners and methods are used in German school for didactic reasons. You get the rounded corners with \lstinline|\usepackage[school]{pgf-umlcd}|. If you need both in one document you can switch it with \lstinline|\switchUmlcdSchool| \\
+\switchUmlcdSchool
 \demo[0.7]{object}
 \demo[0.7]{object-include-methods}
 
