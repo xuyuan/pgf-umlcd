@@ -1,3 +1,9 @@
+% Manual of pgf-umlcd.sty, a convenient set of macros for drawing UML
+% class diagrams.
+% Written by Xu Yuan <xuyuan.cn@gmail.com>
+% This file is part of pgf-umlcd
+% you may get it at http://code.google.com/p/pgf-umlcd/
+
 \documentclass{article}
 \usepackage[margin=12mm]{geometry}
 \usepackage{hyperref}
@@ -32,7 +38,7 @@ keywordstyle=\color{blue}
   citecolor=olive,
   filecolor=magenta,
   menucolor=red,
-  urlcolor=magenta
+  urlcolor=blue
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -62,8 +68,9 @@ keywordstyle=\color{blue}
 
 \begin{document}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\title{Drawing UML Class Diagram by using \texttt{pgf-umlcd (v0.2)}}
-\author{Yuan Xu}
+\title{Drawing UML Class Diagram by using \texttt{pgf-umlcd}}
+\author{\href{mailto:xuyuan.cn@gmail.com}{Yuan Xu}}
+\date{\today{}~(v0.2.1)}
 \maketitle
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -72,12 +79,13 @@ keywordstyle=\color{blue}
   Diagrams. As stated by its name, it is based on a very popular
   graphic package \texttt{PGF/TikZ}. This document presents the usage
   of \texttt{pgf-umlcd} and collects some UML class diagrams as
-  examples.
+  examples. \texttt{pgf-umlcd} can be downloaded from
+  \href{http://code.google.com/p/pgf-umlcd/}{http://code.google.com/p/pgf-umlcd/}.
 \end{abstract}
 
 \tableofcontents
 
-\section{Simple examples}
+\section{Basics}
 \subsection{Class with attributes and operations}
 Note: If you don't want to show empty parts in the diagrams, please
 use \texttt{simplified} option, e.g. \lstinline|\usepackage[simplified]{pgf-umlcd}|.\\
@@ -120,7 +128,7 @@ Note: Object with rounded corners and methods are used in German school for dida
 \subsection{Package}
 \demo{package}
 
-\section{Full examples: Design Patterns}
+\section{Examples}
 \subsection{Abstract Factory}
 \example{abstract-factory}
 
