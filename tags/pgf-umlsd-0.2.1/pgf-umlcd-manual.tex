@@ -1,0 +1,145 @@
+% Manual of pgf-umlcd.sty, a convenient set of macros for drawing UML
+% class diagrams.
+% Written by Xu Yuan <xuyuan.cn@gmail.com>
+% This file is part of pgf-umlcd
+% you may get it at http://code.google.com/p/pgf-umlcd/
+
+\documentclass{article}
+\usepackage[margin=12mm]{geometry}
+\usepackage{hyperref}
+
+\usepackage{tikz}
+
+\usepackage[
+% school,
+% simplified
+]{pgf-umlcd}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{listings}
+\usepackage{color}
+\definecolor{listinggray}{gray}{0.92}
+\lstset{ %
+language=[LaTeX]TeX,
+breaklines=true,
+frame=single,
+% frameround=tttt,
+basicstyle=\footnotesize\ttfamily,
+backgroundcolor=\color{listinggray},
+keywordstyle=\color{blue}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  anchorcolor=black,
+  citecolor=olive,
+  filecolor=magenta,
+  menucolor=red,
+  urlcolor=blue
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\demo}[2][1]{
+\begin{minipage}{.49\linewidth}
+\centering
+\resizebox{#1\linewidth}{!}{
+\input{demo/#2}
+}
+\end{minipage}
+\hspace{0.01\linewidth}
+\begin{minipage}{.5\linewidth}
+\lstinputlisting{demo/#2}
+\end{minipage}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\example}[1]{
+\resizebox{\linewidth}{!}{
+\input{demo/#1}
+}
+\lstinputlisting{demo/#1}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Drawing UML Class Diagram by using \texttt{pgf-umlcd}}
+\author{\href{mailto:xuyuan.cn@gmail.com}{Yuan Xu}}
+\date{\today{}~(v0.2.1)}
+\maketitle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{abstract}
+  \texttt{pgf-umlcd} is a LaTeX package for drawing UML Class
+  Diagrams. As stated by its name, it is based on a very popular
+  graphic package \texttt{PGF/TikZ}. This document presents the usage
+  of \texttt{pgf-umlcd} and collects some UML class diagrams as
+  examples. \texttt{pgf-umlcd} can be downloaded from
+  \href{http://code.google.com/p/pgf-umlcd/}{http://code.google.com/p/pgf-umlcd/}.
+\end{abstract}
+
+\tableofcontents
+
+\section{Basics}
+\subsection{Class with attributes and operations}
+Note: If you don't want to show empty parts in the diagrams, please
+use \texttt{simplified} option, e.g. \lstinline|\usepackage[simplified]{pgf-umlcd}|.\\
+\demo{class}
+
+\subsubsection{Visibility of attributes and operations}
+\demo[0.8]{visibility}
+
+\subsubsection{Abstract class and interface}
+\demo[0.5]{abstract-class}
+\demo[0.5]{interface}
+
+\subsubsection{Object}
+\demo[0.7]{object}
+Note: Object with rounded corners and methods are used in German school for didactic reasons. You get the rounded corners with \lstinline|\usepackage[school]{pgf-umlcd}|. If you need both in one document you can switch it with \lstinline|\switchUmlcdSchool| \\
+\switchUmlcdSchool
+\demo[0.7]{object}
+\demo[0.7]{object-include-methods}
+
+\subsection{Inheritance and implement}
+\subsubsection{Inheritance}
+\demo{inheritance}
+ 
+\subsubsection{Implement an interface}
+\demo{implement-interface}
+
+\subsection{Association, Aggregation and Composition}
+\subsubsection{Association} 
+\demo{association}
+ 
+\subsubsection{Unidirectional association}
+\demo{unidirectional-association}
+
+\subsubsection{Aggregation}
+\demo{aggregation}
+
+\subsubsection{Composition}
+\demo{composition}
+
+\subsection{Package}
+\demo{package}
+
+\section{Examples}
+\subsection{Abstract Factory}
+\example{abstract-factory}
+
+\section{Acknowledgements}
+Many people contributed to \texttt{pgf-umlcd} by reporting problems,
+suggesting various improvements or submitting code. Here is a list of
+these people: \href{mailto:martin.quinson@loria.fr}{Martin Quinson},
+and \href{mailto:johannes_pieper@yahoo.de}{Johannes Pieper}.
+
+\end{document}
+%%% Local Variables: 
+%%% mode: Tex-PDF
+%%% TeX-master: t
+%%% End: 

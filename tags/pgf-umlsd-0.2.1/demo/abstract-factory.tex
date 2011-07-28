@@ -1,0 +1,69 @@
+
+\begin{tikzpicture}[show background grid]
+  \begin{interface}{AbstractFactory}{0,0}
+    \operation[0]{+ CreateProductA()}
+    \operation[0]{+ CreateProductB()}
+  \end{interface}
+
+  \begin{class}{ConcreteFactory2}{-3,-4}
+    \implement{AbstractFactory}
+    \operation{+ CreateProductA()}
+    \operation{+ CreateProductB()}
+  \end{class}
+
+  \begin{class}{ConcreteFactory1}{3,-4}
+    \implement{AbstractFactory}
+    \operation{+ CreateProductA()}
+    \operation{+ CreateProductB()}
+  \end{class}
+
+  \begin{interface}{AbstractProductA}{15,-2}
+  \end{interface}
+
+  \begin{class}{ProductA1}{12,-5}
+    \implement{AbstractProductA}
+  \end{class}
+
+  \begin{class}{ProductA2}{18,-5}
+    \implement{AbstractProductA}
+  \end{class}
+
+  \draw[umlcd style dashed line,->] (ConcreteFactory1) --node[above,
+  sloped, black]{$<<$instantiate$>>$} (ProductA1);
+
+  \draw[umlcd style dashed line,->] (ConcreteFactory2.south) ++
+  (1,0) -- ++(0,-1) -- node[above, sloped,
+  black]{$<<$instantiate$>>$} ++(20,0) -| (ProductA2);
+
+  \begin{interface}{AbstractProductB}{15,-8}
+  \end{interface}
+
+  \begin{class}{ProductB1}{12,-11}
+    \implement{AbstractProductB}
+  \end{class}
+
+  \begin{class}{ProductB2}{18,-11}
+    \implement{AbstractProductB}
+  \end{class}
+
+  \draw[umlcd style dashed line,->] (ConcreteFactory1) |-node[above,
+  sloped, black]{$<<$instantiate$>>$} (ProductB1);
+
+  \draw[umlcd style dashed line,->] (ConcreteFactory2.south) ++
+  (-1,0) -- ++(0,-7) -- node[above, sloped,
+  black]{$<<$instantiate$>>$} ++(20,0) -| (ProductB2);
+
+  \begin{class}{Client}{22,-0.5}
+  \end{class}
+
+  \draw[umlcd style dashed line,->] (Client) --node[above, sloped,
+  black]{$<<$import$>>$} (AbstractFactory);
+
+  \draw[umlcd style dashed line,->] (Client) |-node[above, sloped,
+  black]{$<<$import$>>$} (AbstractProductA);
+
+  \draw[umlcd style dashed line,->] (Client) |-node[above, sloped,
+  black]{$<<$import$>>$} (AbstractProductB);
+\end{tikzpicture}
+
+

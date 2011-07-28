@@ -1,0 +1,16 @@
+\begin{tikzpicture}%[show background grid]
+  \begin{interface}{Person}{0,0}
+    \attribute{firstName : String}
+    \attribute{lastName : String}
+  \end{interface}
+
+  \begin{class}{Professor}{-5,-5}
+    \implement{Person}
+    \attribute{salary : Dollars}
+  \end{class}
+
+  \begin{class}{Student}{5,-5}
+    \implement{Person}
+    \attribute{major : String}
+  \end{class}
+\end{tikzpicture}
