@@ -101,6 +101,8 @@ minimum height=1cm, node distance=2cm]
 \newenvironment{object}[3][]%
 {
 \begin{classAndInterfaceCommon}{#1}{#2}{#3}
+\def\@instanceOf{}
+\def\@@instanceOf{}
 }%
 {
   % customized
@@ -116,11 +118,17 @@ minimum height=1cm, node distance=2cm]
   \fi
   \fi
 
+	\ifx\@instanceOf\@@instanceOf
+		\def\umldObjectName{\umlcdClassName}
+	\else
+		\def\umldObjectName{\umlcdClassName : \@instanceOf}
+	\fi
+
 \node[this umlcd style, anchor=north, umlcd style school] (\umlcdClassName) at (\umlcdClassPos)
     { \ifschool
-				\textbf{\umlcdClassName}
+				\textbf{\umldObjectName}
 			\else 
-				\underline{\textbf{\umlcdClassName}}
+				\underline{\textbf{\umldObjectName}}
 			\fi
 			\insertAttributesAndOperations{}
 };
@@ -251,6 +259,8 @@ minimum height=1cm, node distance=2cm]
   #1}
 \fi
 }
+
+\newcommand{\instanceOf}[1]{\def\@instanceOf{#1}}
 
 \newcommand{\association}[6]{
 \draw [umlcd style] (#1) -- (#4)
