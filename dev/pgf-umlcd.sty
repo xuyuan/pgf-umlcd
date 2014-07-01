@@ -194,13 +194,13 @@ minimum height=1cm, node distance=2cm]
 %% connections
 \begin{pgfonlayer}{connectionlayers}
 \ifnum\c@umlcdClassAbstractClassNum>0
-\foreach \c in {\umlcdClassAbstractClass}{
+\foreach \c in \umlcdClassAbstractClass {
   \draw [umlcd style inherit line] (\c) -- (\umlcdClassName);
 }
 \fi
 
 \ifnum\c@umlcdClassInterfaceNum>0
-\foreach \c in {\umlcdClassInterface}{
+\foreach \c in \umlcdClassInterface {
   \draw [umlcd style implement line] (\c) -- (\umlcdClassName);
 }
 \fi
