@@ -265,32 +265,30 @@ minimum height=1cm, node distance=2cm]
 
 \newcommand{\instanceOf}[1]{\def\@instanceOf{#1}}
 
-\newcommand{\association}[6]{
-\draw [umlcd style] (#1) -- (#4)
-node[near start, above]{#2}
-node[near start, below]{#3}
-node[near end, above]{#5}
-node[near end, below]{#6};
+\newcommand{\association}[7][]{
+\draw [umlcd style,#1] (#2) -- (#5)
+  node[near start, auto]{#3}
+  node[near start, auto, swap]{#4}
+  node[near end, auto]{#6}
+  node[near end, auto, swap]{#7};
 }
 
-\newcommand{\unidirectionalAssociation}[4]{
-\draw [umlcd style, ->] (#1) -- (#4)
-node[near end, above]{#2}
-node[near end, below]{#3};
+\newcommand{\unidirectionalAssociation}[5][]{
+\draw [umlcd style, ->, #1] (#2) -- (#5)
+  node[near end, auto]{#3}
+  node[near end, auto, swap]{#4};
 }
 
-\newcommand{\aggregation}[4]
-{
-\draw[umlcd style, open diamond->] (#1) -- (#4)
-node[near end, above]{#2}
-node[near end, below]{#3};
+\newcommand{\aggregation}[5][]{
+\draw[umlcd style, open diamond->, #1] (#2) -- (#5)
+  node[near end, auto]{#3}
+  node[near end, auto, swap]{#4};
 }
 
-\newcommand{\composition}[4]
-{
-\draw[umlcd style, fill=\umldrawcolor, diamond->] (#1) -- (#4)
-node[near end, above]{#2}
-node[near end, below]{#3};
+\newcommand{\composition}[5][]{
+\draw[umlcd style, fill=\umldrawcolor, diamond->, #1] (#2) -- (#5)
+  node[near end, auto]{#3}
+  node[near end, auto, swap]{#4};
 }
 
 \newenvironment{package}[1]{
