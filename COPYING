@@ -1,14 +1,11 @@
 This file is part of pgf-umlcd.
 
-pgf-umlcd is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
+Copyright 2009-2020 Yuan Xu
 
-pgf-umlcd is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+pgf-umlcd is licensed under the terms of the The LaTeX Project Public License (LPPL) 1.3c, or
+alternatively under the terms of the General Public License (GPL) Version 2.
 
-You should have received a copy of the GNU General Public License
-along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+The terms of each license can be found in the source repository:
+
+Apache License: ./LICENSE-LPPL1.3c.txt
+GPL2 License: ./LICENSE-GPL2.txt
