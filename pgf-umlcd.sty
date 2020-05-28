@@ -98,6 +98,19 @@ minimum height=1cm, node distance=2cm]
 \end{classAndInterfaceCommon}
 }
 
+\newenvironment{staticclass}[3][]%
+{
+\begin{classAndInterfaceCommon}{#1}{#2}{#3}
+}%
+{\calcuateNumberOfParts{}
+\node[this umlcd style, anchor=north] (\umlcdClassName) at (\umlcdClassPos)
+    {$<<$static$>>$ \\ \textbf{\umlcdClassName}
+\insertAttributesAndOperations{}
+};
+
+\end{classAndInterfaceCommon}
+}
+
 % TODO: here the name of \umlcdClassName and \umlObjectName should be
 % switched, it is only for reusing \classAndInterfaceCommon at the
 % moment.
